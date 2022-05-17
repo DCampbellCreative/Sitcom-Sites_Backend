@@ -9,55 +9,10 @@ app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
 
-// const client = new MongoClient(uri);
-
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
-
-// app.get("/shows", (req, res) => {
-//   shows
-//     .find()
-//     .then((shows) => {
-//       res.status(201).json(shows);
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//       res.status(500).send("Error: " + err);
-//     });
-// });
-
-// async function main() {
-/**
- * Connection URI. Update <username>, <password>, and <your-cluster-url> to reflect your cluster.
- * See https://docs.mongodb.com/ecosystem/drivers/node/ for more details
- */
-// const uri = process.env.ATLAS_URI;
-
-// const client = new MongoClient(uri);
-
-// try {
-// Connect to the MongoDB cluster
-// await client.connect();
-
-// Make the appropriate DB calls
-//     await listDatabases(client);
-//   } catch (e) {
-//     console.error(e);
-//   } finally {
-//     await client.close();
-//   }
-// }
-
-// main().catch(console.error);
-
-// async function listDatabases(client) {
-//   databasesList = await client.db().admin().listDatabases();
-
-//   console.log("Databases:");
-//   databasesList.databases.forEach((db) => console.log(` - ${db.name}`));
-// }
 
 app.get("/shows", function (req, res, next) {
   client.connect(function (err, db) {
@@ -75,9 +30,8 @@ app.get("/shows", function (req, res, next) {
   });
 });
 
-// app.get("/test", (req, res) => res.send("hello world"));
-
 // listen for requests
-app.listen(8080, () => {
-  console.log("Your app is listening on port 8080.");
+const port = process.env.PORT || 8080;
+app.listen(port, "0.0.0.0", () => {
+  console.log("Listening on Port " + port);
 });
