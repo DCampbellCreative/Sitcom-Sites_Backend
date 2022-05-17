@@ -14,7 +14,7 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
 });
 
-app.get("/shows", function (req, res, next) {
+app.get("/", function (req, res, next) {
   client.connect(function (err, db) {
     if (err) throw err;
     var dbo = db.db("sitcom_sites");
@@ -36,7 +36,7 @@ app.get("/shows", function (req, res, next) {
 //   console.log("Listening on Port " + port);
 // });
 
-app.listen(process.env.PORT || 3000, function () {
+app.listen(process.env.PORT || 8080, function () {
   console.log(
     "Express server listening on port %d in %s mode",
     this.address().port,
