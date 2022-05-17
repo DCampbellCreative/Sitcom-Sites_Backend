@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const { MongoClient } = require("mongodb");
-require("dotenv").config({ path: "./config.env" });
+// require("dotenv").config({ path: "./config.env" });
 
 const app = express();
 
 app.use(express.json());
 
-const uri = process.env.ATLAS_URI;
+const uri = process.env.CONNECTION_URI;
 
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
