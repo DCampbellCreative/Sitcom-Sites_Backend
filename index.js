@@ -1,11 +1,12 @@
 const express = require("express");
+const cors = require("cors");
 const router = express.Router();
 const { MongoClient } = require("mongodb");
 // require("dotenv").config({ path: "./config.env" });
 
 const app = express();
-
 app.use(express.json());
+app.use(cors());
 
 const uri = process.env.CONNECTION_URI;
 
@@ -29,20 +30,6 @@ app.get("/", function (req, res, next) {
       });
   });
 });
-
-// listen for requests
-// const port = process.env.PORT || 8080;
-// app.listen(port, "0.0.0.0", () => {
-//   console.log("Listening on Port " + port);
-// });
-
-// app.listen(process.env.PORT || 8080, function () {
-//   console.log(
-//     "Express server listening on port %d in %s mode",
-//     this.address().port,
-//     app.settings.env
-//   );
-// });
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
