@@ -1,4 +1,5 @@
 const express = require("express");
+const router = express.Router();
 const { MongoClient } = require("mongodb");
 require("dotenv").config({ path: "./config.env" });
 
@@ -8,7 +9,12 @@ app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
 
-const client = new MongoClient(uri);
+// const client = new MongoClient(uri);
+
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 // app.get("/shows", (req, res) => {
 //   shows
@@ -53,18 +59,23 @@ const client = new MongoClient(uri);
 //   databasesList.databases.forEach((db) => console.log(` - ${db.name}`));
 // }
 
-MongoClient.connect(uri, function (err, db) {
-  if (err) throw err;
-  var dbo = db.db("sitcom_sites");
-  dbo
-    .collection("shows")
-    .find()
-    .toArray(function (err, result) {
-      if (err) throw err;
-      console.log(result);
-      db.close();
-    });
+app.get("/shows", function (req, res, next) {
+  client.connect(function (err, db) {
+    if (err) throw err;
+    var dbo = db.db("sitcom_sites");
+    dbo
+      .collection("shows")
+      .find({})
+      .toArray(function (err, result) {
+        if (err) throw err;
+        console.log(result);
+        db.close();
+        res.status(200).send({ result });
+      });
+  });
 });
+
+// app.get("/test", (req, res) => res.send("hello world"));
 
 // listen for requests
 app.listen(8080, () => {
