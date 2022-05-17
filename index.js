@@ -36,10 +36,15 @@ app.get("/", function (req, res, next) {
 //   console.log("Listening on Port " + port);
 // });
 
-app.listen(process.env.PORT || 8080, function () {
-  console.log(
-    "Express server listening on port %d in %s mode",
-    this.address().port,
-    app.settings.env
-  );
+// app.listen(process.env.PORT || 8080, function () {
+//   console.log(
+//     "Express server listening on port %d in %s mode",
+//     this.address().port,
+//     app.settings.env
+//   );
+// });
+
+const port = process.env.PORT || 8000;
+app.listen(port, () => {
+  console.log("App is running on port " + port);
 });
