@@ -26,7 +26,7 @@ app.get("/", function (req, res, next) {
         if (err) throw err;
         // console.log(result);
         db.close();
-        res.status(200).send();
+        res.status(200).send(result);
       });
   });
 });
