@@ -21,10 +21,10 @@ app.get("/", function (req, res, next) {
     var dbo = db.db("sitcom_sites");
     dbo
       .collection("shows")
-      .find({})
+      .find()
       .toArray(function (err, result) {
         if (err) throw err;
-        console.log(result);
+        // console.log(result);
         db.close();
         res.status(200).send({ result });
       });
