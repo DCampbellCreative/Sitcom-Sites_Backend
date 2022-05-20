@@ -19,15 +19,12 @@ app.get("/", function (req, res, next) {
   client.connect(function (err, db) {
     if (err) throw err;
     var dbo = db.db("sitcom_sites");
-    dbo
-      .collection("shows")
-      .find()
-      .toArray(function (err, result) {
-        if (err) throw err;
-        // console.log(result);
-        db.close();
-        res.status(200).send(result);
-      });
+    dbo.collection("shows").find(function (err, result) {
+      if (err) throw err;
+      // console.log(result);
+      db.close();
+      res.status(200).send(result);
+    });
   });
 });
 
