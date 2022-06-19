@@ -8,6 +8,8 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+const users = Models.User;
+
 const uri = process.env.CONNECTION_URI;
 
 const client = new MongoClient(uri, {
@@ -29,6 +31,10 @@ app.get("/", function (req, res, next) {
         res.status(200).send(result);
       });
   });
+});
+
+app.post("/users", (req, res) => {
+  res.send("Successful POST request creating a new user");
 });
 
 const port = process.env.PORT || 8000;
