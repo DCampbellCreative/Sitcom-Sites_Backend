@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-const users = Models.User;
+// const users = Models.User;
 
 const uri = process.env.CONNECTION_URI;
 
