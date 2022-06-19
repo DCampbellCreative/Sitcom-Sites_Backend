@@ -21,7 +21,7 @@ const client = new MongoClient(uri, {
 
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
-app.get("/", function (req, res, next) {
+app.get("/shows", function (req, res, next) {
   client.connect(function (err, db) {
     if (err) throw err;
     var dbo = db.db("sitcom_sites");
