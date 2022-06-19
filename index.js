@@ -4,6 +4,9 @@ const router = express.Router();
 const { MongoClient } = require("mongodb");
 // require("dotenv").config({ path: "./config.env" });
 
+const mongoose = require("mongoose");
+const Models = require("./models.js");
+
 const app = express();
 app.use(express.json());
 app.use(cors());
