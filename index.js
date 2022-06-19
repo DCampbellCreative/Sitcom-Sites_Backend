@@ -3,7 +3,6 @@ const cors = require("cors");
 const router = express.Router();
 const { MongoClient } = require("mongodb");
 // require("dotenv").config({ path: "./config.env" });
-
 const mongoose = require("mongoose");
 const Models = require("./models.js");
 
@@ -19,6 +18,8 @@ const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
+
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.get("/", function (req, res, next) {
   client.connect(function (err, db) {
