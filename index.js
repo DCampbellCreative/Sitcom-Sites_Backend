@@ -77,7 +77,7 @@ app.post("/users", (req, res) => {
 });
 
 // get a user by username
-app.get("/users/:Username", (req, res) => {
+app.get("/users/:username", (req, res) => {
   users
     .findOne({ username: req.params.Username })
     .then((user) => {
@@ -90,9 +90,9 @@ app.get("/users/:Username", (req, res) => {
 });
 
 // update user
-app.put("/users/:Username", (req, res) => {
+app.put("/users/:username", (req, res) => {
   users.findOneAndUpdate(
-    { Username: req.params.Username },
+    { username: req.params.username },
     {
       $set: {
         username: req.body.username,
