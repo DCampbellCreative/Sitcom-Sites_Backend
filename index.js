@@ -48,25 +48,23 @@ app.get("/shows", function (req, res, next) {
 app.post("/users", (req, res) => {
   client.connect(function (err, db) {
     if (err) throw err;
-    var dbo = db
-      .db("sitcom_sites")
-      .collection("users")
-      .insertOne(
-        {
-          username: req.body.username,
-          email: req.body.email,
-          password: req.body.password,
-        },
-        (err, result) => {
-          if (err) {
-            console.error(err);
-            res.status(500).json({ err: err });
-            return;
-          }
-          console.log(result);
-          res.status(200).json({ ok: true });
+    var dbo = db.db("sitcom_sites");
+    dbo.collection("users").insertOne(
+      {
+        username: req.body.username,
+        email: req.body.email,
+        password: req.body.password,
+      },
+      (err, result) => {
+        if (err) {
+          console.error(err);
+          res.status(500).json({ err: err });
+          return;
         }
-      );
+        console.log(result);
+        res.status(200).json({ ok: true });
+      }
+    );
   });
 });
 
