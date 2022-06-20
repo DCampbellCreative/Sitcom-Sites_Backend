@@ -84,7 +84,7 @@ app.get("/users/:username", (req, res) => {
           return;
         }
         console.log(result);
-        res.status(200).json(result);
+        res.status(200).send(result);
       }
     );
   });
