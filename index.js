@@ -45,41 +45,66 @@ app.get("/shows", function (req, res, next) {
   });
 });
 
-// register a new user
 app.post("/users", (req, res) => {
-  // check if user already exists
-  users
-    .findOne({ username: req.body.username })
-    .then((user) => {
-      if (user) {
-        return res.status(400).send(req.body.username + "already exists");
-      } else {
-        // if user doesn't exist create one
-        users
-          .create({
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password,
-          })
-          .then((user) => {
-            res.status(201).json(user);
-          })
-          .catch((error) => {
-            console.error(error);
-            res.status(500).send("Error: " + error);
-          });
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).send("Error: " + error);
-    });
+  client.connect(function (err, db) {
+    if (err) throw err;
+    var dbo = db
+      .db("sitcom_sites")
+      .collection("users")
+      .insertOne(
+        {
+          username: req.body.username,
+          email: req.body.email,
+          password: req.body.password,
+        },
+        (err, result) => {
+          if (err) {
+            console.error(err);
+            res.status(500).json({ err: err });
+            return;
+          }
+          console.log(result);
+          res.status(200).json({ ok: true });
+        }
+      );
+  });
 });
+
+// // register a new user
+// app.post("/users", (req, res) => {
+//   // check if user already exists
+//   users
+//     .findOne({ username: req.body.username })
+//     .then((user) => {
+//       if (user) {
+//         return res.status(400).send(req.body.username + "already exists");
+//       } else {
+//         // if user doesn't exist create one
+//         users
+//           .create({
+//             username: req.body.username,
+//             email: req.body.email,
+//             password: req.body.password,
+//           })
+//           .then((user) => {
+//             res.status(201).json(user);
+//           })
+//           .catch((error) => {
+//             console.error(error);
+//             res.status(500).send("Error: " + error);
+//           });
+//       }
+//     })
+//     .catch((error) => {
+//       console.error(error);
+//       res.status(500).send("Error: " + error);
+//     });
+// });
 
 // get a user by username
 app.get("/users/:username", (req, res) => {
   users
-    .findOne({ username: req.params.Username })
+    .findOne({ username: req.params.username })
     .then((user) => {
       res.json(user);
     })
