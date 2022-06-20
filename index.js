@@ -73,10 +73,9 @@ app.get("/users/:username", (req, res) => {
   client.connect(function (err, db) {
     if (err) throw err;
     var dbo = db.db("sitcom_sites");
-    dbo.collection("users").findOne(
-      {
-        username: req.body.username,
-      },
+    dbo.collection("users").findOne({
+      username: req.body.username,
+    }),
       (err, result) => {
         if (err) {
           console.error(err);
@@ -85,8 +84,7 @@ app.get("/users/:username", (req, res) => {
         }
         console.log(result);
         res.status(200).send(result);
-      }
-    );
+      };
   });
 });
 
