@@ -58,8 +58,8 @@ app.post("/users", (req, res) => {
         users
           .create({
             username: req.body.username,
-            password: req.body.password,
             email: req.body.email,
+            password: req.body.password,
           })
           .then((user) => {
             res.status(201).json(user);
