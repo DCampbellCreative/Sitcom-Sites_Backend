@@ -75,7 +75,7 @@ app.get("/users/:username", function (req, res) {
     var dbo = db.db("sitcom_sites");
     dbo
       .collection("users")
-      .findOne({ username: "test222" }, function (err, result) {
+      .findOne({ username: req.params.username }, function (err, result) {
         if (err) throw err;
         res.status(200).send(result);
         db.close();
