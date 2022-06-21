@@ -69,22 +69,20 @@ app.post("/users", (req, res) => {
   });
 });
 
-app.get("/users/:username", (req, res) => {
+app.get("/users/:username", function (req, res) {
   client.connect(function (err, db) {
     if (err) throw err;
     var dbo = db.db("sitcom_sites");
-    dbo.collection("users").findOne({
-      username: req.body.username,
-    }),
-      (err, result) => {
-        if (err) {
-          console.error(err);
-          res.status(500).json({ err: err });
-          return;
-        }
-        console.log(result);
+    dbo.collection("users").findOne(
+      {
+        username: username,
+      },
+      function (err, result) {
+        if (err) throw err;
         res.status(200).send(result);
-      };
+        db.close();
+      }
+    );
   });
 });
 
