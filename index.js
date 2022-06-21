@@ -73,11 +73,13 @@ app.get("/users/:username", function (req, res) {
   client.connect(function (err, db) {
     if (err) throw err;
     var dbo = db.db("sitcom_sites");
-    dbo.collection("users").findOne({}, function (err, result) {
-      if (err) throw err;
-      res.status(200).send(result);
-      db.close();
-    });
+    dbo
+      .collection("users")
+      .findOne({ username: "test222" }, function (err, result) {
+        if (err) throw err;
+        res.status(200).send(result);
+        db.close();
+      });
   });
 });
 
