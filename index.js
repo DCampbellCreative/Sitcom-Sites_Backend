@@ -79,7 +79,7 @@ app.get("/users/:username", function (req, res) {
       },
       function (err, result) {
         if (err) throw err;
-        res.status(200).send(result);
+        res.status(200).json(result);
         db.close();
       }
     );
