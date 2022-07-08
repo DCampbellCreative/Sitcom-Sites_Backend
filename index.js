@@ -72,7 +72,7 @@ app.get("/shows", (req, res, next) => {
 //   });
 // });
 
-router.post(
+app.post(
   "/signup",
   [
     check("username", "Please Enter a Valid Username").not().isEmpty(),
