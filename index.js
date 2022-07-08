@@ -119,7 +119,7 @@ app.post(
 
       jwt.sign(
         payload,
-        "randomString",
+        "secret",
         {
           expiresIn: 10000,
         },
