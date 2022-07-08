@@ -7,10 +7,10 @@ let userSchema = mongoose.Schema({
   password: { type: String, required: true },
 });
 
+const User = mongoose.model("users", userSchema);
+
+module.exports = User;
+
 // const User = mongoose.model("users", userSchema);
 
-// module.exports = User;
-
-// const User = mongoose.model("users", userSchema);
-
-module.exports = mongoose.model("users", userSchema);
+// module.exports = mongoose.model("users", userSchema);
