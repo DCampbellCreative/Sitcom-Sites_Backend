@@ -17,7 +17,7 @@ const mongoose = require("mongoose");
 const Models = require("./models.js");
 
 // model for users created in models.js
-const users = Models.user;
+const user = Models.user;
 
 // environmental variable created on Heroku
 const uri = process.env.CONNECTION_URI;
@@ -91,7 +91,7 @@ router.post(
 
     const { username, email, password } = req.body;
     try {
-      let user = await user.findOne({
+      let user = await users.findOne({
         email,
       });
       if (user) {
