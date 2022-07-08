@@ -17,7 +17,7 @@ const mongoose = require("mongoose");
 const Models = require("./models.js");
 
 // model for users created in models.js
-const user = Models.user;
+const User = Models.User;
 
 // environmental variable created on Heroku
 const uri = process.env.CONNECTION_URI;
@@ -100,7 +100,7 @@ app.post(
         });
       }
 
-      user = new user({
+      user = new User({
         username,
         email,
         password,
