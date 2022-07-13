@@ -28,9 +28,6 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
 });
 
-// database as a variable
-var dbo = db.db("sitcom_sites");
-
 // connect to mongoose
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -38,6 +35,7 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 app.get("/shows", (req, res, next) => {
   client.connect((err, db) => {
     if (err) throw err;
+    var dbo = db.db("sitcom_sites");
     dbo
       .collection("shows")
       .find()
@@ -54,6 +52,7 @@ app.get("/shows", (req, res, next) => {
 app.post("/users", (req, res) => {
   client.connect((err, db) => {
     if (err) throw err;
+    var dbo = db.db("sitcom_sites");
     dbo.collection("users").insertOne(
       {
         username: req.body.username,
@@ -143,6 +142,7 @@ app.post("/users", (req, res) => {
 app.get("/users/:username", (req, res) => {
   client.connect(function (err, db) {
     if (err) throw err;
+    var dbo = db.db("sitcom_sites");
     dbo
       .collection("users")
       .findOne({ username: req.params.username }, (err, result) => {
