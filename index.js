@@ -31,6 +31,12 @@ const client = new MongoClient(uri, {
 // connect to mongoose
 mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
+// default route
+app.get("/", (req, res, next) => {
+  res.send("API is up and running");
+  res.status(200);
+});
+
 // get info about all shows
 app.get("/shows", (req, res, next) => {
   client.connect((err, db) => {
